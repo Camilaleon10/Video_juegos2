@@ -1,0 +1,71 @@
+module.exports = {
+  content: ["./public/**/*.html", "./public/**/*.js"],
+  theme: {
+    colors: {
+      transparent: 'transparent',
+      black: '#000000',
+      white: '#ffffff',
+      primary: '#0f172a',
+      secondary: '#3b82f6',
+      accent: '#00d4ff',
+      neon: '#00ff88',
+      purple: '#a855f7',
+      red: {
+        400: '#f87171',
+        500: '#ef4444',
+        900: '#7f1d1d',
+      },
+      slate: {
+        400: '#94a3b8',
+        500: '#64748b',
+        600: '#475569',
+        700: '#334155',
+        800: '#1e293b',
+        900: '#0f172a',
+      },
+      green: {
+        400: '#4ade80',
+        900: '#166534',
+      },
+    },
+    spacing: {
+      '0': '0',
+      '1': '0.25rem',
+      '2': '0.5rem',
+      '3': '0.75rem',
+      '4': '1rem',
+      '5': '1.25rem',
+      '6': '1.5rem',
+      '8': '2rem',
+      '12': '3rem',
+      '16': '4rem',
+      '20': '5rem',
+      '24': '6rem',
+      '32': '8rem',
+      '40': '10rem',
+      '48': '12rem',
+      '56': '14rem',
+      '64': '16rem',
+      '72': '18rem',
+      '80': '20rem',
+      '84': '21rem',
+      '96': '24rem',
+    },
+    extend: {
+      borderRadius: {
+        'xl': '1.25rem',
+        '2xl': '2rem',
+        '3xl': '2.5rem',
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+      },
+      boxShadow: {
+        'neon': '0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.6)',
+        'neon-purple': '0 0 10px rgba(168, 85, 247, 0.8), 0 0 20px rgba(168, 85, 247, 0.6)',
+      },
+    },
+  },
+  plugins: [],
+};
+

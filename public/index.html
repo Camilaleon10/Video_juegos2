@@ -1,70 +1,313 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GameZone Store</title>
-    <link href="./output.css" rel="stylesheet" />
-  </head>
-
-  <body class="bg-slate-100 min-h-screen">
-  <!-- HEADER -->
-  <header class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
-    <div>
-      <h1 class="text-2xl font-bold tracking-tight">GameZone Store</h1>
-      <p class="text-sm text-slate-200">Catálogo de videojuegos</p>
-    </div>
-    <span class="text-xs text-slate-300">v1.0 · demo educativa</span>
-  </header>
- 
-  <!-- CONTENIDO -->
-  <main class="p-6 max-w-6xl mx-auto">
-    <!-- BARRA DE BÚSQUEDA / CONTROLES -->
-    <section class="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-      <div class="flex items-center gap-2 w-full md:max-w-md">
-        <input
-          type="text"
-          placeholder="Buscar videojuego..."
-          class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
-        />
-        <button class="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm hover:bg-slate-800">
-          Buscar
-        </button>
-      </div>
- 
-      <div class="flex gap-2">
-        <select
-          class="rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-400"
-        >
-          <option value="">Plataforma</option>
-          <option value="pc">PC</option>
-          <option value="ps5">PlayStation</option>
-          <option value="xbox">Xbox</option>
-          <option value="switch">Nintendo Switch</option>
-        </select>
- 
-        <select
-          class="rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-400"
-        >
-          <option value="">Ordenar por</option>
-          <option value="rating">Mejor valorados</option>
-          <option value="recent">Más recientes</option>
-          <option value="name">Nombre</option>
-        </select>
-      </div>
-    </section>
- 
-    <!-- GRID DE VIDEOJUEGOS -->
-    <section>
-      <h2 class="text-lg font-semibold mb-4 text-slate-800">Videojuegos destacados</h2>
- 
-      <div 
-      id="grid-videojuegos"
-      class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VIDEO JUEGOS LEÓN</title>
+        <link href="./output.css?v=10" rel="stylesheet"/>
+        <link href="./custom.css?v=10" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-      </div>
-    </section>
-  </main>
-  <script src="./script.js"></script>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        main {
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+
+        #grid-videogames {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 1rem;
+            padding: 1.5rem;
+            min-height: calc(100vh - 200px);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-primary via-slate-900 to-primary min-h-screen text-white" style="background-attachment: fixed;">
+
+    <!-- GRID PATRÓN FUTURISTA (FONDO) -->
+    <div class="fixed inset-0 opacity-20 pointer-events-none" style="background-image: 
+      linear-gradient(0deg, transparent 24%, rgba(0, 212, 255, .05) 25%, rgba(0, 212, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 212, 255, .05) 75%, rgba(0, 212, 255, .05) 76%, transparent 77%, transparent),
+      linear-gradient(90deg, transparent 24%, rgba(0, 212, 255, .05) 25%, rgba(0, 212, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 212, 255, .05) 75%, rgba(0, 212, 255, .05) 76%, transparent 77%, transparent);
+      background-size: 50px 50px;">
+    </div>
+
+    <!-- HEADER FUTURISTA -->
+    <header class="relative border-b border-accent/20 bg-black/40 backdrop-blur-sm px-6 py-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div>
+                <h1 class="text-4xl font-bold bg-gradient-to-r from-accent via-purple to-secondary bg-clip-text text-transparent">
+                    🎮 VIDEO JUEGOS LEÓN
+                </h1>
+                <p class="text-sm text-accent/70 mt-1">Catálogo de videojuegos • Ofertas en tiempo real</p>
+            </div>
+            <span class="text-xs text-accent/60 bg-secondary/10 px-4 py-2 rounded-full border border-secondary/30">v1.0 • Examen Final</span>
+        </div>
+    </header>
+
+    <main class="relative p-6 max-w-7xl mx-auto">
+
+        <!-- CONTROLES -->
+        <section class="mb-8 bg-black/50 backdrop-blur-sm border border-accent/20 rounded-2xl p-6">
+            <!-- Búsqueda -->
+            <div class="flex gap-3 w-full md:max-w-lg mb-4">
+                <input
+                    id="input-busqueda"
+                    type="text"
+                    placeholder="🔍 Buscar videojuego..."
+                    class="w-full rounded-lg bg-black/80 border border-accent/30 px-4 py-3 text-sm text-white placeholder-accent/50 focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                />
+
+                <!-- BOTÓN BUSCAR -->
+                <button
+                    id="btn-buscar"
+                    class="px-6 py-3 bg-gradient-to-r from-secondary to-purple text-white rounded-lg text-sm hover:shadow-neon transition-all font-semibold flex items-center gap-2"
+                >
+                    <span id="texto-buscar">Buscar</span>
+                    <span
+                        id="spinner-buscar"
+                        class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"
+                    ></span>
+                </button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex gap-3 flex-wrap">
+                <select id="select-plataforma"
+                        class="rounded-lg bg-black/80 border border-accent/30 px-4 py-2 text-sm text-white focus:ring-2 focus:ring-accent transition-all">
+                    <option value="">🖥️ Plataforma</option>
+                    <option value="steam">Steam</option>
+                    <option value="epic">Epic</option>
+                    <option value="gog">GOG</option>
+                </select>
+
+                <select id="select-ordenar"
+                        class="rounded-lg bg-black/80 border border-accent/30 px-4 py-2 text-sm text-white focus:ring-2 focus:ring-accent transition-all">
+                    <option value="">📊 Ordenar por</option>
+                    <option value="rating">Mejor rating</option>
+                    <option value="recent">Más recientes</option>
+                    <option value="name">A - Z</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- INDICADORES -->
+        <div id="estado-de-carga" class="hidden flex items-center gap-3 bg-secondary/10 border border-secondary/30 text-secondary px-4 py-3 rounded-lg mb-6 backdrop-blur-sm">
+            <div class="animate-spin h-5 w-5 border-2 border-secondary border-t-transparent rounded-full"></div>
+            <span>🎮 Cargando videojuegos...</span>
+        </div>
+
+        <p id="mensaje-de-error" class="hidden text-red-400 bg-red-900/20 border border-red-500/30 px-4 py-3 rounded-lg mb-6 backdrop-blur-sm">
+            ❌ Error al cargar los videojuegos.
+        </p>
+
+        <!-- GRID -->
+        <section>
+            <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-accent via-neon to-accent bg-clip-text text-transparent">
+                ⭐ Ofertas destacadas
+            </h2>
+
+            <div
+                id="grid-videogames"
+                class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+            ></div>
+
+            <!-- BOTÓN VER MÁS -->
+            <div class="text-center mt-8">
+                <button
+                    id="btn-ver-mas"
+                    class="px-8 py-4 bg-gradient-to-r from-neon to-accent text-black rounded-lg hover:shadow-neon transition-all flex items-center justify-center gap-3 mx-auto font-bold text-lg"
+                >
+                    <span id="texto-vermas">Ver más juegos</span>
+                    <span
+                        id="spinner-vermas"
+                        class="hidden animate-spin border-2 border-black border-t-transparent rounded-full w-5 h-5"
+                    ></span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DETALLES -->
+    <div
+        id="modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+    >
+        <div class="bg-gradient-to-br from-slate-900 to-primary rounded-2xl p-8 max-w-2xl w-full shadow-neon border border-accent/30 relative">
+
+            <button
+                id="btn-cerrar-modal"
+                class="absolute top-4 right-4 text-accent hover:text-neon text-2xl transition-colors"
+            >
+                ✕
+            </button>
+
+            <h2 id="modal-titulo" class="text-3xl font-bold mb-4 bg-gradient-to-r from-accent to-neon bg-clip-text text-transparent">Título del juego</h2>
+
+            <img id="modal-imagen" src="" alt="" class="w-full rounded-xl mb-6 border border-accent/30 shadow-neon"/>
+
+            <div class="space-y-3 mb-6">
+                <p class="text-accent/70"><b>💰 Precio normal:</b> <span id="modal-precio-normal" class="text-white"></span></p>
+                <p class="text-neon"><b>🎯 Precio oferta:</b> <span id="modal-precio-oferta" class="text-neon font-bold"></span></p>
+                <p class="text-purple"><b>💎 Ahorro:</b> <span id="modal-ahorro" class="text-purple font-bold"></span></p>
+            </div>
+
+            <a
+                id="modal-enlace-tienda"
+                href="#"
+                target="_blank"
+                class="mt-6 inline-block w-full px-6 py-3 bg-gradient-to-r from-neon to-accent text-black rounded-lg hover:shadow-neon transition-all w-full text-center font-bold text-lg"
+            >
+                🛒 Ir a la tienda
+            </a>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html> style="background-image: 
+      linear-gradient(0deg, transparent 24%, rgba(0, 212, 255, .05) 25%, rgba(0, 212, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 212, 255, .05) 75%, rgba(0, 212, 255, .05) 76%, transparent 77%, transparent),
+      linear-gradient(90deg, transparent 24%, rgba(0, 212, 255, .05) 25%, rgba(0, 212, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 212, 255, .05) 75%, rgba(0, 212, 255, .05) 76%, transparent 77%, transparent);
+      background-size: 50px 50px;">
+    </div>
+
+    <!-- HEADER FUTURISTA -->
+    <header class="relative border-b border-accent/20 bg-black/40 backdrop-blur-sm px-6 py-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div>
+                <h1 class="text-4xl font-bold bg-gradient-to-r from-accent via-purple to-secondary bg-clip-text text-transparent">
+                    🎮 VIDEO JUEGOS LEÓN
+                </h1>
+                <p class="text-sm text-accent/70 mt-1">Catálogo de videojuegos • Ofertas en tiempo real</p>
+            </div>
+            <span class="text-xs text-accent/60 bg-secondary/10 px-4 py-2 rounded-full border border-secondary/30">v1.0 • Examen Final</span>
+        </div>
+    </header>
+
+    <main class="relative p-6 max-w-7xl mx-auto">
+
+        <!-- CONTROLES -->
+        <section class="mb-8 bg-black/50 backdrop-blur-sm border border-accent/20 rounded-2xl p-6">
+            <!-- Búsqueda -->
+            <div class="flex gap-3 w-full md:max-w-lg mb-4">
+                <input
+                    id="input-busqueda"
+                    type="text"
+                    placeholder="🔍 Buscar videojuego..."
+                    class="w-full rounded-lg bg-black/80 border border-accent/30 px-4 py-3 text-sm text-white placeholder-accent/50 focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                />
+
+                <!-- BOTÓN BUSCAR -->
+                <button
+                    id="btn-buscar"
+                    class="px-6 py-3 bg-gradient-to-r from-secondary to-purple text-white rounded-lg text-sm hover:shadow-neon transition-all font-semibold flex items-center gap-2"
+                >
+                    <span id="texto-buscar">Buscar</span>
+                    <span
+                        id="spinner-buscar"
+                        class="hidden animate-spin border-2 border-white border-t-transparent rounded-full w-4 h-4"
+                    ></span>
+                </button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex gap-3 flex-wrap">
+                <select id="select-plataforma"
+                        class="rounded-lg bg-black/80 border border-accent/30 px-4 py-2 text-sm text-white focus:ring-2 focus:ring-accent transition-all">
+                    <option value="">🖥️ Plataforma</option>
+                    <option value="steam">Steam</option>
+                    <option value="epic">Epic</option>
+                    <option value="gog">GOG</option>
+                </select>
+
+                <select id="select-ordenar"
+                        class="rounded-lg bg-black/80 border border-accent/30 px-4 py-2 text-sm text-white focus:ring-2 focus:ring-accent transition-all">
+                    <option value="">📊 Ordenar por</option>
+                    <option value="rating">Mejor rating</option>
+                    <option value="recent">Más recientes</option>
+                    <option value="name">A - Z</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- INDICADORES -->
+        <div id="estado-de-carga" class="hidden flex items-center gap-3 bg-secondary/10 border border-secondary/30 text-secondary px-4 py-3 rounded-lg mb-6 backdrop-blur-sm">
+            <div class="animate-spin h-5 w-5 border-2 border-secondary border-t-transparent rounded-full"></div>
+            <span>🎮 Cargando videojuegos...</span>
+        </div>
+
+        <p id="mensaje-de-error" class="hidden text-red-400 bg-red-900/20 border border-red-500/30 px-4 py-3 rounded-lg mb-6 backdrop-blur-sm">
+            ❌ Error al cargar los videojuegos.
+        </p>
+
+        <!-- GRID -->
+        <section>
+            <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-accent via-neon to-accent bg-clip-text text-transparent" style="padding: 0 1.5rem; padding-top: 1.5rem;">
+                ⭐ Ofertas destacadas
+            </h2>
+
+            <div id="grid-videogames"></div>
+
+            <!-- BOTÓN VER MÁS -->
+            <div class="text-center py-8 bg-black/50 border-t border-accent/20">
+                <button
+                    id="btn-ver-mas"
+                    class="px-8 py-4 bg-gradient-to-r from-neon to-accent text-black rounded-lg hover:shadow-neon transition-all flex items-center justify-center gap-3 mx-auto font-bold text-lg"
+                >
+                    <span id="texto-vermas">Ver más juegos</span>
+                    <span
+                        id="spinner-vermas"
+                        class="hidden animate-spin border-2 border-black border-t-transparent rounded-full w-5 h-5"
+                    ></span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DETALLES -->
+    <div
+        id="modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+    >
+        <div class="bg-gradient-to-br from-slate-900 to-primary rounded-2xl p-8 max-w-2xl w-full shadow-neon border border-accent/30 relative">
+
+            <button
+                id="btn-cerrar-modal"
+                class="absolute top-4 right-4 text-accent hover:text-neon text-2xl transition-colors"
+            >
+                ✕
+            </button>
+
+            <h2 id="modal-titulo" class="text-3xl font-bold mb-4 bg-gradient-to-r from-accent to-neon bg-clip-text text-transparent">Título del juego</h2>
+
+            <img id="modal-imagen" src="" alt="" class="w-full rounded-xl mb-6 border border-accent/30 shadow-neon"/>
+
+            <div class="space-y-3 mb-6">
+                <p class="text-accent/70"><b>💰 Precio normal:</b> <span id="modal-precio-normal" class="text-white"></span></p>
+                <p class="text-neon"><b>🎯 Precio oferta:</b> <span id="modal-precio-oferta" class="text-neon font-bold"></span></p>
+                <p class="text-purple"><b>💎 Ahorro:</b> <span id="modal-ahorro" class="text-purple font-bold"></span></p>
+            </div>
+
+            <a
+                id="modal-enlace-tienda"
+                href="#"
+                target="_blank"
+                class="mt-6 inline-block w-full px-6 py-3 bg-gradient-to-r from-neon to-accent text-black rounded-lg hover:shadow-neon transition-all w-full text-center font-bold text-lg"
+            >
+                🛒 Ir a la tienda
+            </a>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
 </body>
 </html>
